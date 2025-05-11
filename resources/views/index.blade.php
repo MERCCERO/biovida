@@ -111,7 +111,7 @@
     </a>
     <a href="">
       <div class="hidden md:col-span-5 md:mt-0 md:flex">
-        <img class="dark:hidden max-w-lg rounded-lg " src="/imagenes/20.jpg" />
+       
         {{-- <img class="hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/girl-shopping-list-dark.svg" alt="shopping illustration" /> --}}
       </div>
 
