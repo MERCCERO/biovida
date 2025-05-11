@@ -5,6 +5,7 @@ use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ClientesController;
 
 // Route::get('/', function () {
  //return view('welcome');
@@ -27,7 +28,7 @@ Route::view('/faq','preview.faq');
 Route::view('/terms', 'preview.terms');
 
 //vista login
-Route::get('/login', [AdministradoresController::class, 'login'])->name('login'); // Página de login si no está autenticado
+Route::get('/loginAdmin', [AdministradoresController::class, 'login'])->name('login'); // Página de login si no está autenticado
 Route::post('/administradores/in', [AdministradoresController::class, 'in']); // Enviar formulario de login
 Route::middleware('auth:admins')->group(function(){
 //Sarai
@@ -52,6 +53,35 @@ Route::post('/administradores/{id}/actualizar',[AdministradoresController::class
 Route::get('/administradores/{id}/mostrar',[AdministradoresController::class,'mostrar']);
 Route::post('/administradores/{id}/borrar',[AdministradoresController::class,'borrar']);
 });
+
+//Rutas de CLIENTES
+Route::get('/login', [ClientesController::class, 'login'])->name('login'); // Página de login si no está autenticado
+Route::get('/clientes/in', [ClientesController::class, 'in']); // Enviar formulario de login
+Route::post('/clientes/in', [ClientesController::class, 'in']);
+
+
+
+
+Route::middleware('auth:clientes')->group(function(){
+
+Route::view('/panel', 'plantilla.layout');
+
+
+Route::get('/formularioClientes', [ClientesController::class, 'formularioClientes']);
+Route::get('/listaClientes', [ClientesController::class, 'listaClientes']);
+Route::post('/clientes/out', [ClientesController::class, 'out']);
+
+Route::get('/clientes/listaClientes', [ClientesController::class,'listaClientes']);
+Route::get('/clientes/formularioClientes', [ClientesController::class,'formularioClientes']);
+Route::post('/clientes/guardar', [ClientesController::class, 'guardar']);
+Route::get('/clientes/{id}/editar', [ClientesController::class, 'editar']);
+Route::post('/clientes/{id}/actualizar', [ClientesController::class, 'actualizar']);
+Route::get('/clientes/{id}/mostrar', [ClientesController::class, 'mostrar']);
+Route::post('/clientes/{id}/borrar', [ClientesController::class, 'borrar']);
+
+});
+
+
 
 
 //controllers
@@ -89,3 +119,18 @@ Route::post('cart/removeItem',[CartController::class,'removeItem'])->name('remov
 
 //pedidos
 Route::get('pedidos/listaPedidos',[CartController::class,'hacerPedido'])->name('hacerPedido');
+
+//Martin - proveedores y productos.
+
+
+Route::get('/listaProveedores', [ProveedorController::class, 'listaProveedores']);
+Route::get('/registroProveedores', [ProveedorController::class, 'registroProveedores']);
+
+
+Route::get('/proveedores/listaProveedores', [ProveedorController::class, 'listaProveedores']);
+Route::get('/proveedores/registroProveedores', [ProveedorController::class, 'registroProveedores']);
+Route::post('/proveedores/guardar', [ProveedorController::class, 'guardar']);
+Route::get('/proveedores/{id}/mostrar', [ProveedorController::class, 'mostrar']);
+Route::get('/proveedores/{id}/editar', [ProveedorController::class, 'editar']);
+Route::put('/proveedores/{id}/actualizar', [ProveedorController::class, 'actualizar']);
+Route::delete('/proveedores/{id}/borrar', [ProveedorController::class, 'borrar']);
