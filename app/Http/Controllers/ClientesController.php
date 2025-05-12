@@ -9,17 +9,45 @@ use Illuminate\Support\Facades\Hash;
 
 class ClientesController extends Controller
 {
-   
-
-    public function listaClientes(){
-        $clientes=Cliente::all(); // Select * from  clientes
-        
-        return view('/clientes/listaClientes')->with('clientes',$clientes);
-    }
+ 
+    public function perfil()
+{
+    $cliente = Auth::guard('clientes')->user();
+    return view('clientes.perfil', compact('cliente'));
+}
 
     public function formularioClientes(){
         return view('/clientes/formularioClientes');
     }
+
+    public function registro(){
+        return view('/clientes/registro');
+    }
+
+    public function guardarRegistro(Request $req){
+    $cliente = new Cliente();
+    $cliente->nombres = $req->nombres;
+    $cliente->apellidos = $req->apellidos;
+    $cliente->correo = $req->correo;
+    $cliente->contraseña = Hash::make($req->contraseña);
+    $cliente->direccion = $req->direccion;
+    $cliente->imagen = "storage/registro/clientes/cliente_default.jpg";
+    $cliente->save();
+
+    if($req->hasFile('imagen')){
+        $imagen = $req->file('imagen');
+        $extension = $imagen->extension();
+        $nombre = "cliente_" . $cliente->id . "_1." . $extension;
+        $ruta = $imagen->storeAs('imagenes/registro', $nombre, 'public');
+        $cliente->imagen = asset('storage/' .$ruta);
+        $cliente->save();
+    }
+
+    return redirect('/')->with('success', 'Registro exitoso');
+}
+
+     
+
 
 
       public function in(Request $request){
@@ -78,7 +106,7 @@ class ClientesController extends Controller
     
         $cliente->direccion = $req->direccion;
         $cliente->imagen = "storage/cliente/clientes/cliente_default.jpg";
-        $cliente->estado = $req->estado;
+       
     
         $cliente->save();
     
@@ -97,10 +125,10 @@ class ClientesController extends Controller
 
 
 
-     public function editar($id){
-      $cliente = Cliente::find($id);
-      return view('/clientes/edicionClientes')->with('cliente',$cliente);
-    }
+    public function editar($id){
+    $cliente = Cliente::findOrFail($id);
+    return view('/clientes/edicionClientes')->with('cliente',$cliente);
+}
 
     public function mostrar($id){
     $cliente = Cliente::find($id);
@@ -108,8 +136,10 @@ class ClientesController extends Controller
     }
 
     public function actualizar(Request $req, $id){
-        $cliente = Cliente::find($id);
-    
+        
+        
+        $cliente = Cliente::findOrFail($id);
+
         $cliente->nombres = $req->nombres;
         $cliente->apellidos = $req->apellidos;
         $cliente->correo = $req->correo;
@@ -120,7 +150,7 @@ class ClientesController extends Controller
         }
     
         $cliente->direccion = $req->direccion;
-        $cliente->estado = $req->estado;
+       
     
         // Guardar los cambios
         $cliente->save();
@@ -135,18 +165,20 @@ class ClientesController extends Controller
             $cliente->save();
         }
     
-        return redirect('/clientes/listaClientes');
+        return redirect('/perfil');
     }
     
   
   public function borrar( Request $req, $id){
-    $cliente = Cliente::find($id);
+     $cliente = Cliente::find($id);
 
-    
-    $cliente->estado="inactivo";
+    if ($cliente) {
+        $cliente->delete();
+    }
 
-
-    $cliente->save();
-    return redirect('/clientes/formularioClientes');
+    return redirect('/');
   }
+
+
+
 }

@@ -1,4 +1,4 @@
-@extends('/plantilla/layout')
+@extends('/plantilla/vista')
 
 @section('titulo', '- Clientes')
 

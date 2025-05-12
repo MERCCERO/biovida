@@ -1,150 +1,163 @@
 @extends('/plantilla/layout')
 
-{{-- Colocar una secction  por cada yield agregaadao en la palntilla--}}
- @section('titulo','Inicio')
-     
-{{--Section para ele contenido,  son componentes--}}
+@section('titulo', 'Inicio')
 
 @section('contenido')
-<style>
-  .text-justify-custom {
-    text-align: justify;
-}
-</style>
-<section class="py-24 relative bg-gray-50">
-    <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
-        <div class="w-full justify-start items-center gap-8 grid lg:grid-cols-2 grid-cols-1">
-            <div class="w-full flex-col justify-start lg:items-start items-center gap-10 inline-flex">
-                <div class="w-full flex-col justify-start lg:items-start items-center gap-4 flex">
-                    <h2 class="text-gray-900 text-4xl font-bold font-manrope leading-normal lg:text-start text-center">¡Bienvenidos!</h2>
-                    <p class="text-gray-500 text-base font-normal leading-relaxed lg:text-start text-center text-justify-custom">
-                      Nuestra página está dedicada a la venta de productos biodegradables desechables. Aquí encontrarás soluciones sostenibles para reducir el impacto ambiental de tus actividades diarias. 
-                      Desde cubiertos hasta empaques, todos nuestros productos están diseñados pensando en el planeta. 
-                      Explora nuestra oferta y únete a la lucha contra el plástico.
-                  </p>
-                  
+
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-5 lg:px-5">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="flex flex-col gap-10 items-center lg:items-start">
+                    <div class="flex flex-col gap-4 text-center lg:text-left">
+                        <h2 class="text-4xl font-bold text-gray-900 font-manrope">¡Bienvenidos!</h2>
+                        <p class="text-base text-gray-500 leading-relaxed" style="text-align: justify;">
+    Nuestra página está dedicada a la venta de productos biodegradables desechables. Aquí
+    encontrarás soluciones sostenibles para reducir el impacto ambiental de tus actividades diarias.
+    Desde cubiertos hasta empaques, todos nuestros productos están diseñados pensando en el planeta.
+    Explora nuestra oferta y únete a la lucha contra el plástico.
+</p>
+
+                    </div>
                 </div>
-                {{-- <button class="sm:w-fit w-full px-3.5 py-2 bg-indigo-600 hover:bg-indigo-800 transition-all duration-700 ease-in-out rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] justify-center items-center flex">
-                    <span class="px-1.5 text-white text-sm font-medium leading-6">Get Started</span>
-                </button> --}}
+                <img class="rounded-3xl object-cover w-full" src="/imagenes/pexels-akilmazumder-4763942.jpg"
+                    alt="about Us image" />
             </div>
-            <img class="lg:mx-0 mx-auto h-full rounded-3xl object-cover" src="/imagenes/pexels-akilmazumder-4763942.jpg" alt="about Us image" />
         </div>
-    </div>
-</section>
-  <!-- Custom Style -->
-  <style>
-    .gallery-top .swiper-slide {
-        height: fit-content;
-        margin-right: 0px;
-    }
-    .swiper-wrapper{  
-      
-  }
-  .gallery-top .swiper-slide-active {
-    transform: scale(1.1);
-  }      
-.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after,
-.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after{
-    content: ' ';
+    </section>
+
+
+                                                   <!-- Custom Style -->
+<style>
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow:hidden;
+  background-color: rgba(0, 0, 0, 0.8);
 }
-.swiper-button-next svg, .swiper-button-prev svg{
-    width: 20px;
-    height: 20px;
+.lightbox-image {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+ max-height: 100%;
 }
-.swiper-button-next, .swiper-button-prev{
+.close {
+  color: #fff;
+  font-size: 3em;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+}
+.gallery {
+  width: 90vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-template-rows: 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
   
-  margin-top: 1px;
 }
-.swiper-button-prev, .swiper-rtl .swiper-button-next {
-    left: auto;
+.gallery img {
+  max-width: 100%;
+  cursor: pointer;
 }
-.swiper-button-next, .swiper-rtl .swiper-button-prev {
-    right: 10;
+.gallery img:hover {
+  max-width: 100%;
+  cursor: pointer;
 }
-
-.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
-  bottom: var(--swiper-pagination-bottom,px);
-  z-index: 10;
-  color: transparent;
-  left: 14px;
-}
-.swiper-pagination-current{
-  color: black;
-}
-.gallery-top .swiper-slide .swiper-box {
-  opacity: 0;
-  transform: scale(1);
-}
-.gallery-top .swiper-slide-active .swiper-box {
-  transform: scale(0.9);
-  opacity: 1;
-}
-@media (max-width: 1920px){
-  .gallery-top .swiper-slide-active .swiper-box{
-    opacity: 1;
-  }
-} 
-
 </style>
-<section class="py-24">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 overflow-hidden">
-    <div class="pb-16">
-      <h2 class="w-full text-center text-gray-900 text-4xl font-bold font-manrope leading-loose pb-2.5">Galería</h2>
-      <p class="w-full text-center text-gray-600 text-lg font-normal leading-8">Encuentra la armonía entre belleza y sostenibilidad en nuestra galería de productos.</p>
+ <section class="py-24"> 
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-2.5 lg:pb-16 pb-10">
+      <h2 class="w-full text-center text-gray-900 text-4xl font-bold font-manrope leading-normal">Our Gallery</h2>
+      <div class="w-full text-center text-gray-600 text-lg font-normal leading-8">Step into a realm where art comes to life.</div>
     </div>
-
-    
+    <div class="gallery">
+      <div class="flex flex-col mb-10">
+        <div class="grid md:grid-cols-12 gap-8 lg:mb-11 mb-7">
+          <div class="md:col-span-4 h-[500px] w-full rounded-3xl">
+            <img src="/imagenes/gale1.jpg" alt="Gallery image" class="gallery-image object-cover rounded-3xl hover:grayscale transition-all duration-700 ease-in-out mx-auto w-full h-full">
+          </div>
+          <div class="md:col-span-8 h-[500px] w-full rounded-3xl">
+            <img src="/imagenes/gale2.jpg" alt="Gallery image" class="gallery-image object-cover rounded-3xl hover:grayscale transition-all duration-700 ease-in-out mx-auto w-full h-full">
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 grid-cols-1 gap-8">
+          <div class="h-[350px] w-full rounded-3xl">
+            <img src="/imagenes/gale3.jpg" alt="Gallery image" class="gallery-image object-cover rounded-3xl hover:grayscale transition-all duration-700 ease-in-out mx-auto w-full h-full">
+          </div>
+          <div class="h-[350px] w-full rounded-3xl">
+            <img src="/imagenes/gale4.jpg" alt="Gallery image" class="gallery-image object-cover rounded-3xl hover:grayscale transition-all duration-700 ease-in-out mx-auto w-full h-full">
+          </div>
+          <div class="h-[350px] w-full rounded-3xl">
+            <img src="/imagenes/gale5.jpg" alt="Gallery image" class="gallery-image object-cover rounded-3xl hover:grayscale transition-all duration-700 ease-in-out mx-auto w-full h-full">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="lightbox" id="lightbox">
+    <span class="close" id="close">&times;</span>
+    <img src="" alt="" class="lightbox-image" id="lightbox-image">
+  </div>
 </section>
-
-<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 bg-gray-50">
-  <div class="mx-auto grid max-w-screen-xl px-4 pb-8 md:grid-cols-12 lg:gap-12 lg:pb-16 xl:gap-0">
-  <a href="{{ url('/products') }}">
-   
-      <div class="content-center justify-self-start md:col-span-7 md:text-start">
-        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight dark:text-dark md:max-w-2xl md:text-5xl xl:text-6xl">¡No dejes pasar esta oportunidad!<br /></h1>
-        <p class="mb-4 max-w-2xl text-gray-500 dark:text-gray-400 md:mb-12 md:text-lg mb-3 lg:mb-5 lg:text-xl">No esperes mas - ¡Aprovecha un 20% de descuento en productos seleccionados y ahorra en grande!</p>
-        <a href="#" class="inline-block rounded-lg bg-primary-700 px-6 py-3.5 text-center font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Shop Now</a>
-      </div>
-    </a>
-    <a href="">
-      <div class="hidden md:col-span-5 md:mt-0 md:flex">
-       
-        {{-- <img class="hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/girl-shopping-list-dark.svg" alt="shopping illustration" /> --}}
-      </div>
-
-    </a>
-      
-    </div>
-  
-  
-  
-</section>
-
-    
-</section>
-
+<!-- Initialize Swiper -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-  new Swiper('.swiper-container', {
-    slidesPerView: 3, // Muestra 3 productos al mismo tiempo
-    spaceBetween: 20, // Espaciado entre productos
-    loop: true, // Activa el bucle para que los productos nunca desaparezcan
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    autoplay: {
-        delay: 2000, // Intervalo de 5 segundos entre cambios
-      },
+  // Get references to elements
+  const gallery = document.querySelector('.gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const closeButton = document.getElementById('close');
+
+  // Add event listener to each image
+  gallery.addEventListener('click', e => {
+    if (e.target.classList.contains('gallery-image')) {
+      const imageSrc = e.target.src;
+      lightboxImage.src = imageSrc;
+      lightbox.style.display = 'flex';
+    }
   });
-});
+
+  // Close lightbox when close button is clicked
+  closeButton.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+
+  // Close lightbox when clicking outside the image
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+    }
+  });
 </script>
-
-                                                                                            
                                             
-                                                                                                                                        
-@endsection
 
+    <section class="bg-white py-8 md:py-16 bg-gray-50 dark:bg-gray-900 antialiased"> 
+  <div class="max-w-screen-xl mx-auto px-4 grid md:grid-cols-12 lg:gap-12 items-center">
+    
+    <!-- Texto -->
+    <div class="md:col-span-7 text-center md:text-left">
+      <h1 class="text-4xl md:text-5xl xl:text-6xl font-extrabold dark:text-dark mb-4">¡No dejes pasar esta oportunidad!</h1>
+      <p class="text-gray-500 dark:text-gray-400 text-lg lg:text-xl mb-6">¡Aprovecha un 30% de descuento en productos seleccionados y ahorra en grande!</p>
+      
+      <button id="contactButton" type="button" onclick="window.location.href='{{ url('/catalogoProductos') }}';"
+        class="py-2 px-5 text-sm rounded-full bg-green-500 text-white font-semibold hover:bg-green-700 transition-all duration-300">
+        Ver Ahora
+      </button>
+    </div>
+
+    <!-- Imagen -->
+    <div class="md:col-span-5 hidden md:flex justify-center">
+      <div class="h-[400px] w-full max-w-md rounded-3xl overflow-hidden">
+        <img src="/imagenes/descuento.jpg" alt="Gallery image" class="object-cover w-full h-full rounded-3xl hover:grayscale transition-all duration-700 ease-in-out">
+      </div>
+    </div>
+
+  </div>
+</section>
+@endsection

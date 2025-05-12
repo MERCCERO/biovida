@@ -1,11 +1,11 @@
 @extends('plantilla/layout')
 
-@section('titulo', '- Registro de Productos')
+@section('titulo', '- Productos')
 
 @section('contenido')
 
     {{-- barra de busqueda --}}
-   <div>
+   <div class="mt-10">
         <form class="flex items-center max-w-sm mx-auto  ">   
             <label for="simple-search" class="sr-only">BUSCAR</label>
             <div class="relative w-full">

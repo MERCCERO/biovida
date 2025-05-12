@@ -148,42 +148,4 @@ class AdministradoresController extends Controller
         
     }
 
-    //tabla info
-
-    public function registroId(){
-         
-    }
-
-    public function registroNombre(){
-         
-    }
-
-    public function registroApellidos(){
-         
-    }
-
-    public function registroCorreo(){
-         
-    }
-
-    public function registroUsername(){
-         
-    }
-
-    public function registroContraseña(){
-         
-    }
-
-    public function registroImagen(){
-         
-    }
-    public function registroEstado(){
-         
-    }
-
-    public function registroRol(){
-         
-    }
-
-
 }

@@ -4,7 +4,7 @@
 
 @section('contenido')
 
-<form class="max-w-md mx-auto" method="post" action="/productos/{{ $producto->id }}/borrar"">
+<form class="max-w-md mx-auto" method="post" action="/productos/{{ $producto->id }}/borrar">
     @csrf
     
   <div class="relative z-0 w-full mb-5 group">

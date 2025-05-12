@@ -15,7 +15,6 @@ use App\Http\Controllers\ClientesController;
 
 //vista princiapal
 Route::view('/', 'index');
-
 //vista de Acerca de nosotros
 Route::view('/acercan', 'preview.acercan');
 //vista de Contactanos
@@ -27,38 +26,45 @@ Route::view('/faq','preview.faq');
 //vista de Termionos y condiciones
 Route::view('/terms', 'preview.terms');
 
-//vista login
-Route::get('/loginAdmin', [AdministradoresController::class, 'login'])->name('login'); // Página de login si no está autenticado
-Route::post('/administradores/in', [AdministradoresController::class, 'in']); // Enviar formulario de login
-Route::middleware('auth:admins')->group(function(){
-//Sarai
-// Rutas de vista
-Route::view('/panel', 'plantilla.layoutAuth'); // Página principal del panel
-Route::view('/registro', 'admins.registro'); // Página de registro de administradores
-// Route::view('/lista', 'admins.lista'); // Página de lista de administradores
-Route::get('/lista', [AdministradoresController::class, 'lista']);
+Route::view('/promotions', 'preview.promotions');
+
+Route::view('/help', 'preview.help');
+
+// //vista login
+// Route::get('/loginAdmin', [AdministradoresController::class, 'login'])->name('login'); // Página de login si no está autenticado
+// Route::post('/administradores/in', [AdministradoresController::class, 'in']); // Enviar formulario de login
+// Route::middleware('auth:admins')->group(function(){
+// //Sarai
+// // Rutas de vista
+// Route::view('/panel', 'plantilla.layoutAuth'); // Página principal del panel
+// Route::view('/registro', 'admins.registro'); // Página de registro de administradores
+// // Route::view('/lista', 'admins.lista'); // Página de lista de administradores
+// Route::get('/lista', [AdministradoresController::class, 'lista']);
 
 
-// Rutas de autenticación
-//Route::post('/administradores/in', [AdministradoresController::class, 'in']); // Enviar formulario de login
-Route::post('/administradores/out', [AdministradoresController::class, 'out']); // Cerrar sesión (logout)
-//Route::get('/', [AdministradoresController::class, 'login'])->name('login'); // Página de login si no está autenticado
+// // Rutas de autenticación
+// //Route::post('/administradores/in', [AdministradoresController::class, 'in']); // Enviar formulario de login
+// Route::post('/administradores/out', [AdministradoresController::class, 'out']); // Cerrar sesión (logout)
+// //Route::get('/', [AdministradoresController::class, 'login'])->name('login'); // Página de login si no está autenticado
 
-//Sarai - Administradores 
-Route::get('/administradores/lista',[AdministradoresController::class,'lista']);
-Route::get('/administradores/registro',[AdministradoresController::class,'registro']);
-Route::post('/administradores/guardar',[AdministradoresController::class,'guardar']);
-Route::get('/administradores/{id}/editar',[AdministradoresController::class,'editar']);
-Route::post('/administradores/{id}/actualizar',[AdministradoresController::class,'actualizar']);
-Route::get('/administradores/{id}/mostrar',[AdministradoresController::class,'mostrar']);
-Route::post('/administradores/{id}/borrar',[AdministradoresController::class,'borrar']);
-});
+// //Sarai - Administradores 
+// Route::get('/administradores/lista',[AdministradoresController::class,'lista']);
+// Route::get('/administradores/registro',[AdministradoresController::class,'registro']);
+// Route::post('/administradores/guardar',[AdministradoresController::class,'guardar']);
+// Route::get('/administradores/{id}/editar',[AdministradoresController::class,'editar']);
+// Route::post('/administradores/{id}/actualizar',[AdministradoresController::class,'actualizar']);
+// Route::get('/administradores/{id}/mostrar',[AdministradoresController::class,'mostrar']);
+// Route::post('/administradores/{id}/borrar',[AdministradoresController::class,'borrar']);
+// });
+
+
 
 //Rutas de CLIENTES
 Route::get('/login', [ClientesController::class, 'login'])->name('login'); // Página de login si no está autenticado
 Route::get('/clientes/in', [ClientesController::class, 'in']); // Enviar formulario de login
 Route::post('/clientes/in', [ClientesController::class, 'in']);
-
+Route::get('/registro', [ClientesController::class, 'registro'])->name('registro');
+Route::post('/clientes/guardarRegistro', [ClientesController::class, 'guardarRegistro']);
 
 
 
@@ -71,7 +77,7 @@ Route::get('/formularioClientes', [ClientesController::class, 'formularioCliente
 Route::get('/listaClientes', [ClientesController::class, 'listaClientes']);
 Route::post('/clientes/out', [ClientesController::class, 'out']);
 
-Route::get('/clientes/listaClientes', [ClientesController::class,'listaClientes']);
+Route::get('/perfil', [ClientesController::class,'perfil'])->name('perfil');
 Route::get('/clientes/formularioClientes', [ClientesController::class,'formularioClientes']);
 Route::post('/clientes/guardar', [ClientesController::class, 'guardar']);
 Route::get('/clientes/{id}/editar', [ClientesController::class, 'editar']);
@@ -80,12 +86,6 @@ Route::get('/clientes/{id}/mostrar', [ClientesController::class, 'mostrar']);
 Route::post('/clientes/{id}/borrar', [ClientesController::class, 'borrar']);
 
 });
-
-
-
-
-//controllers
-
 
 //vistas de los productos
 Route::view('/catalogoProductos','/productos/catalogoProductos');
@@ -103,9 +103,6 @@ Route::get('/catalogoProductos', [ProductoController::class, 'verProductos']);
 Route::post('/productos/{id}/borrar', [ProductoController::class, 'borrar']);
 
 
-//vistas de los clientes 
-Route::view('/formularioClientes','/clientes/formularioClientes');
-
 //Rutas para carrito de compras
 Route::view('cart','carrito/cart');
 //AgregarProductos
@@ -120,12 +117,13 @@ Route::post('cart/removeItem',[CartController::class,'removeItem'])->name('remov
 //pedidos
 Route::get('pedidos/listaPedidos',[CartController::class,'hacerPedido'])->name('hacerPedido');
 
+
+
+
+
 //Martin - proveedores y productos.
-
-
 Route::get('/listaProveedores', [ProveedorController::class, 'listaProveedores']);
 Route::get('/registroProveedores', [ProveedorController::class, 'registroProveedores']);
-
 
 Route::get('/proveedores/listaProveedores', [ProveedorController::class, 'listaProveedores']);
 Route::get('/proveedores/registroProveedores', [ProveedorController::class, 'registroProveedores']);
