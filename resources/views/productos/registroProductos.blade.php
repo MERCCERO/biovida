@@ -1,4 +1,4 @@
-@extends('plantilla/layoutAuth')
+@extends('plantilla/layout')
 
 @section('titulo', '- Registro de Productos')
 
@@ -13,7 +13,7 @@
     </a>
 </div>
 
-<form class="max-w-md mx-auto" method="POST" action="{{ url('/productos/guardar') }}">
+<form class="max-w-md mx-auto" method="POST" action="{{ url('/productos/guardar') }}" enctype="multipart/form-data">
     @csrf
 
    

@@ -196,6 +196,9 @@
                     <ul>
                          <li class="mb-2"><a href="{{ url('/faq') }}" class="hover:text-green-500">FAQs</a></li>
                     </ul>
+                    <ul>
+                         <li class="mb-2"><a href="{{ url('/productos/registros') }}" class="hover:text-green-500">Add</a></li>
+                    </ul>
                 </div>
             </div>
 
@@ -257,6 +260,7 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=test"></script>
 
 
 </body>

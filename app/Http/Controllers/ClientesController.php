@@ -68,7 +68,7 @@ class ClientesController extends Controller
       Auth::guard('clientes')->login($cliente);
       $request->session()->regenerate();
   
-      return redirect('/panel');
+      return redirect('');
       }
   
   

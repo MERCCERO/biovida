@@ -1,4 +1,4 @@
-@extends('plantilla/layoutAuth')
+@extends('plantilla/layout')
 
 @section('titulo', '- Registro de Productos')
 

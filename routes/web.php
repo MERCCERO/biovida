@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\PedidoController;
 
 // Route::get('/', function () {
  //return view('welcome');
@@ -113,6 +115,9 @@ Route::get('cart/checkout',[CartController::class,'checkout'])->name('checkout')
 Route::get('cart/clear',[CartController::class,'clear'])->name('clear');
 //removerProductos
 Route::post('cart/removeItem',[CartController::class,'removeItem'])->name('removeItem');
+//aumetarProductos
+Route::post('/carrito/cantidad', [CartController::class, 'updateCantidad'])->name('updateCantidad');
+
 
 //pedidos
 Route::get('pedidos/listaPedidos',[CartController::class,'hacerPedido'])->name('hacerPedido');
@@ -132,3 +137,13 @@ Route::get('/proveedores/{id}/mostrar', [ProveedorController::class, 'mostrar'])
 Route::get('/proveedores/{id}/editar', [ProveedorController::class, 'editar']);
 Route::put('/proveedores/{id}/actualizar', [ProveedorController::class, 'actualizar']);
 Route::delete('/proveedores/{id}/borrar', [ProveedorController::class, 'borrar']);
+
+//pago
+Route::get('/paypal/checkout', [PayPalController::class, 'checkout'])->name('paypal.checkout');
+Route::get('/paypal/success', [PayPalController::class, 'success'])->name('paypal.success');
+Route::get('/paypal/cancel', [PayPalController::class, 'cancel'])->name('paypal.cancel');
+
+
+//pedidos
+Route::get('/hacerPedido',[PedidoController::class,'hacerPedido'])->name('hacerPedido');
+Route::post('/finalizarPedido', [PedidoController::class, 'finalizarPedido'])->name('finalizarPedido');

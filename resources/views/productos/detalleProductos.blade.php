@@ -7,11 +7,22 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
             <!-- Imagen del producto -->
-            <div class="flex justify-center">
-                <div class="w-full max-w-lg rounded-xl overflow-hidden shadow-lg">
-                    <img src="{{ asset('imagenes/'.$producto->imagen) }}" 
-                         alt="{{ $producto->nombre }}"
-                         class="w-full h-auto object-cover">
+            <!-- Imagen del producto con miniaturas -->
+            <div class="flex flex-col items-center">
+                <!-- Imagen principal -->
+                <div class="w-full max-w-lg rounded-xl overflow-hidden shadow-lg mb-4">
+                   <img id="imagenPrincipal" src="{{ asset($producto->imagen1) }}" alt="Imagen 1" class="w-full h-auto object-cover transition duration-200">
+                </div>
+
+                <!-- Miniaturas -->
+                <div class="flex gap-4">
+                    @foreach (['imagen1', 'imagen2', 'imagen3', 'imagen4'] as $img)
+                        @if ($producto->$img)
+                            <img src="{{ asset($producto->$img) }}" alt="Imagen"
+                                class="w-20 h-20 object-cover rounded cursor-pointer border-2 border-transparent hover:border-green-500 transition duration-150"
+                                onclick="document.getElementById('imagenPrincipal').src = this.src;">
+                        @endif
+                    @endforeach
                 </div>
             </div>
 
@@ -68,16 +79,16 @@
                 
 
                     <!-- Cantidad y botones -->
-                    <div class="space-y-4">
                         <!-- Selector de cantidad -->
                         <div class="flex items-center border border-gray-300 rounded-full overflow-hidden max-w-xs">
-                            <button class="px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200">
+                            <button type="button" onclick="decrementarCantidad()" class="px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
                                 </svg>
                             </button>
-                            <input type="text" value="1" class="w-12 text-center border-0 focus:ring-0">
-                            <button class="px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200">
+                            <input type="text" id="cantidad" name="cantidad" value="1" min="1"
+                                class="w-12 text-center border-0 focus:ring-0" readonly>
+                            <button type="button" onclick="incrementarCantidad()" class="px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                                 </svg>
@@ -88,6 +99,8 @@
                         <form action="{{ route('add') }}" method="post" class="mt-2">
                 @csrf
                 <input type="hidden" name="id" value="{{ $producto->id }}">
+                <!-- Agrega input oculto para cantidad -->
+                <input type="hidden" name="cantidad" id="cantidadInput" value="1">
                 <button type="submit" class="w-full py-2.5 px-6 text-sm rounded-full border border-solid border-green-500 text-green-600 cursor-pointer font-semibold text-center shadow-xs transition-all duration-100 hover:bg-green-700 hover:text-white flex items-center justify-center gap-2">
                     <svg class="stroke-green-600" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.7394 17.875C10.7394 18.6344 10.1062 19.25 9.32511 19.25C8.54402 19.25 7.91083 18.6344 7.91083 17.875M16.3965 17.875C16.3965 18.6344 15.7633 19.25 14.9823 19.25C14.2012 19.25 13.568 18.6344 13.568 17.875M4.1394 5.5L5.46568 12.5908C5.73339 14.0221 5.86724 14.7377 6.37649 15.1605C6.88573 15.5833 7.61377 15.5833 9.06984 15.5833H15.2379C16.6941 15.5833 17.4222 15.5833 17.9314 15.1605C18.4407 14.7376 18.5745 14.0219 18.8421 12.5906L19.3564 9.84059C19.7324 7.82973 19.9203 6.8243 19.3705 6.16215C18.8207 5.5 17.7979 5.5 15.7522 5.5H4.1394ZM4.1394 5.5L3.66797 2.75"
@@ -102,4 +115,31 @@
         </div>
     </div>
 </section>
+
+<script>
+    // Mantén esta función para el input visible:
+    function incrementarCantidad() {
+        const cantidadInputVisible = document.getElementById('cantidad');
+        let valor = parseInt(cantidadInputVisible.value);
+        valor++;
+        cantidadInputVisible.value = valor;
+        document.getElementById('cantidadInput').value = valor;  // sincronizar el input oculto
+    }
+
+    function decrementarCantidad() {
+        const cantidadInputVisible = document.getElementById('cantidad');
+        let valor = parseInt(cantidadInputVisible.value);
+        if (valor > 1) {
+            valor--;
+            cantidadInputVisible.value = valor;
+            document.getElementById('cantidadInput').value = valor;  // sincronizar el input oculto
+        }
+    }
+
+    // Además, para que si el usuario cambia el valor directamente (aunque está readonly, por seguridad):
+    document.getElementById('cantidad').addEventListener('change', function() {
+        document.getElementById('cantidadInput').value = this.value;
+    });
+</script>
+
 @endsection

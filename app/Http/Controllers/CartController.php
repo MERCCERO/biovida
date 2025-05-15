@@ -12,21 +12,24 @@ use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
     //
-    public function add (Request $request){
-        $productos = Producto::find($request->id);
-        if(empty($productos))
-            return redirect('carrito.cart');
+    public function add(Request $request) {
+    $request->validate([
+        'id' => 'required|exists:productos,id',
+        'cantidad' => 'required|integer|min:1'
+    ]);
 
-        Cart::add(
-            $productos->id,
-            $productos->nombre,
-            1,
-            $productos->precio,
-            ['imagen1'=>$productos->imagen1]
-        );
+    $productos = Producto::find($request->id);
 
-        return redirect()->back()->with("success","Item agregado: ".$productos->nombre);
-    }
+    Cart::add(
+        $productos->id,
+        $productos->nombre,
+        $request->cantidad,
+        $productos->precio,
+        ['imagen1' => $productos->imagen1]
+    );
+
+    return redirect()->back()->with("success", "Item agregado: " . $productos->nombre);
+}
 
     public function checkout(){
         return view('carrito.cart');
@@ -67,7 +70,7 @@ class CartController extends Controller
                 'producto_Id' => $producto->id,
                 'cantidad' => $producto->qty,
                 'precio' => $producto->price,
-                'subtotal' => $subtotal,
+               'subtotal' => $subtotal,
                 'descuento' => 0,
             ]);
 
@@ -92,6 +95,21 @@ class CartController extends Controller
                 return redirect()->back()->with("success","Pedido realizado con éxito");
                 return view('/productos/catalogoProductos');
 
+    }
+    public function updateCantidad(Request $request)
+    {
+        $rowId = $request->input('rowId');
+        $accion = $request->input('accion');
+
+        $item = Cart::get($rowId);
+
+        if ($accion === 'incrementar') {
+            Cart::update($rowId, $item->qty + 1);
+        } elseif ($accion === 'disminuir' && $item->qty > 1) {
+            Cart::update($rowId, $item->qty - 1);
+        }
+
+        return redirect()->back();
     }
         
     
