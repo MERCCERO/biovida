@@ -1,8 +1,16 @@
-@extends('plantilla/layoutAuth')
+@extends('plantilla/layout')
 
 @section('titulo','- Productos')
 
 @section('contenido')
+
+<div class="flex flex-col justify-between items-center w-full mb-4 p-5 px-5">
+    <a href="{{ url('/registroProductos') }}">
+        <button type='button' class='py-5 px-10 text-sm rounded-lg bg-green-500 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-green-700'>
+            Registrar Producto
+        </button>
+    </a>
+</div>
 
 <h2 class="flex flex-col justify-center items-center font-semibold text-black-700 rounded-lg mb-5">Productos</h2>
 <div class="flex flex-col justify-center items-center">
@@ -36,13 +44,13 @@
                             <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
                                 <div class="flex items-center gap-2">
                                     @if($producto->imagen1)
-                                    <img src="imagenes/{{ $producto->imagen1 }}" alt="{{ $producto->imagen1 }}" class="w-12 h-12 object-cover rounded">
+                                    <img src="{{ asset($producto->imagen1) }}" alt="Imagen 1" class="w-12 h-12 object-cover rounded">
                                     @endif
                                     @if($producto->imagen2)
-                                    <img src="imagenes/{{ $producto->imagen2 }}" alt="{{ $producto->imagen2 }}" class="w-12 h-12 object-cover rounded">
+                                    <img src="{{ asset($producto->imagen2) }}" alt="Imagen 3" class="w-12 h-12 object-cover rounded">
                                     @endif
                                     @if($producto->imagen3)
-                                    <img src="imagenes/{{ $producto->imagen3 }}" alt="{{ $producto->imagen3 }}" class="w-12 h-12 object-cover rounded">
+                                    <img src="{{ asset($producto->imagen3) }}" alt="Imagen 3" class="w-12 h-12 object-cover rounded">
                                     @endif
                                 </div>
                             </td>
@@ -85,13 +93,7 @@
     </div>
 </div>
 
-<div class="flex flex-col justify-between items-center w-full mb-4">
-    <a href="{{ url('/registroProductos') }}">
-        <button type='button' class='py-2.5 px-6 text-sm rounded-lg bg-green-500 text-white cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-green-700'>
-            Registrar Producto
-        </button>
-    </a>
-</div>
+
 
 @endsection
 

@@ -38,30 +38,33 @@ class ProductoController extends Controller
         $productos->save();
 
         // Imagen 1
-        if($req->hasFile('imagen1')) {
-            $imagen = $req->file('imagen1');
+        if ($req->hasFile('imagen')) {
+            $imagen = $req->file('imagen');
             $extension = $imagen->extension();
-            $nombre = "producto_{$productos->id}_1." . $extension;
+            $nombre = "cliente_" . $productos->id . "_1." . $extension;
             $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
-            $productos->imagen1 = 'storage/' . $ruta;
+            $productos->imagen = asset('storage/' .$ruta);
+            $productos->save();
         }
 
         // Imagen 2
-        if($req->hasFile('imagen2')) {
-            $imagen = $req->file('imagen2');
+        if ($req->hasFile('imagen')) {
+            $imagen = $req->file('imagen');
             $extension = $imagen->extension();
-            $nombre = "producto_{$productos->id}_2." . $extension;
+            $nombre = "cliente_" . $productos->id . "_1." . $extension;
             $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
-            $productos->imagen2 = 'storage/' . $ruta;
+            $productos->imagen = asset('storage/' .$ruta);
+            $productos->save();
         }
 
         // Imagen 3
-        if($req->hasFile('imagen3')) {
-            $imagen = $req->file('imagen3');
+        if ($req->hasFile('imagen')) {
+            $imagen = $req->file('imagen');
             $extension = $imagen->extension();
-            $nombre = "producto_{$productos->id}_3." . $extension;
+            $nombre = "cliente_" . $productos->id . "_1." . $extension;
             $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
-            $productos->imagen3 = 'storage/' . $ruta;
+            $productos->imagen = asset('storage/' .$ruta);
+            $productos->save();
         }
 
         // Guardar de nuevo con rutas de imágenes actualizadas
@@ -93,56 +96,56 @@ class ProductoController extends Controller
   }
 
     public function verProductos() {
-    $productos = Producto::paginate(4);
+    $productos = Producto::paginate(15);
     return view('productos/catalogoProductos', compact('productos'));
 }
 
 
     public function actualizar(Request $req, $id){
-      
-        $productos = Producto::find($id);
+    $producto = Producto::find($id);
 
-        // Actualizar campos del formulario
-        $productos->nombre = $req->nombre;
-        $productos->descripcion = $req->descripcion;
-        $productos->precio = $req->precio;
-        $productos->existencia = $req->existencia;
-        $productos->descuento = $req->descuento;
-        $productos->modelado = $req->modelado;
-        $productos->estado = $req->estado;
+    // Actualizar datos básicos
+    $producto->nombre = $req->nombre;
+    $producto->descripcion = $req->descripcion;
+    $producto->precio = $req->precio;
+    $producto->existencia = $req->existencia;
+    $producto->descuento = $req->descuento;
+    $producto->modelado = $req->modelado;
+    $producto->estado = $req->estado;
 
-        // Imagen 1
-        if($req->hasFile('imagen1')) {
-            $imagen = $req->file('imagen1');
-            $extension = $imagen->extension();
-            $nombre = "producto_{$productos->id}_1." . $extension;
-            $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
-            $productos->imagen1 = 'storage/' . $ruta;
-        }
-
-        // Imagen 2
-        if($req->hasFile('imagen2')) {
-            $imagen = $req->file('imagen2');
-            $extension = $imagen->extension();
-            $nombre = "producto_{$productos->id}_2." . $extension;
-            $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
-            $productos->imagen2 = 'storage/' . $ruta;
-        }
-
-        // Imagen 3
-        if($req->hasFile('imagen3')) {
-            $imagen = $req->file('imagen3');
-            $extension = $imagen->extension();
-            $nombre = "producto_{$productos->id}_3." . $extension;
-            $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
-            $productos->imagen3 = 'storage/' . $ruta;
-        }
-
-        // Guardar cambios finales
-        $productos->save();
-
-        return redirect('/productos/registros');
+    // Imagen 1
+    if ($req->hasFile('imagen1')) {
+        $imagen = $req->file('imagen1');
+        $extension = $imagen->extension();
+        $nombre = "producto_" . $producto->id . "_1." . $extension;
+        $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
+        $producto->imagen1 = 'storage/' . $ruta;
     }
+
+    // Imagen 2
+    if ($req->hasFile('imagen2')) {
+        $imagen = $req->file('imagen2');
+        $extension = $imagen->extension();
+        $nombre = "producto_" . $producto->id . "_2." . $extension;
+        $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
+        $producto->imagen2 = 'storage/' . $ruta;
+    }
+
+    // Imagen 3
+    if ($req->hasFile('imagen3')) {
+        $imagen = $req->file('imagen3');
+        $extension = $imagen->extension();
+        $nombre = "producto_" . $producto->id . "_3." . $extension;
+        $ruta = $imagen->storeAs('imagenes/productos', $nombre, 'public');
+        $producto->imagen3 = 'storage/' . $ruta;
+    }
+
+    // Guardar todo
+    $producto->save();
+
+    return redirect('/productos/registros');
+}
+
 
     public function borrar( Request $req, $id){
         $productos = Producto::find($id);

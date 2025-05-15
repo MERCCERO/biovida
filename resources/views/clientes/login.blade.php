@@ -20,6 +20,7 @@
     </style>
 </head>
 <body class="bg-gray-100 overflow-hidden"> 
+   
   <section class="flex justify-center items-center min-h-screen relative">
     <img src="/imagenes/fondo.jpg" alt="gradient background image" class="absolute inset-0 w-full h-full object-cover z-0">
     <div class="mx-auto max-w-lg px-6 lg:px-8 absolute z-10 py-20">
@@ -50,7 +51,7 @@
           </button>
           
           <button type="button" 
-           onclick="window.location.href=''"
+           onclick="window.location.href='{{ url('/registro') }}'"
           class="w-full h-8 text-white text-sm font-medium rounded-full bg-indigo-600 hover:bg-indigo-700 transition duration-300 shadow-sm mt-2">
           Registrarse
          </button>
@@ -72,15 +73,15 @@
             Continuar con Google
           </a>
         </div>
+        <div class="flex items-center justify-center my-4">
+                <ul class="flex items-center gap-5">
+                    <li> <a href="{{ url('/') }}" class="inline-flex items-center font-medium text-grey-600 dark:text-green-500 hover:underline">
+                           
+                            <span class="font-medium text-base leading-7 text-grey-600">Regresar</span>
+                        </a>
+                    </li>
+    </div>
         
-        <div>
-          <a href=""
-             class="w-full py-1.5 px-4 bg-white text-gray-800 text-sm font-medium rounded-lg border border-gray-300 shadow hover:bg-gray-100 transition duration-200 flex items-center justify-center gap-2">
-            <img src="{{ asset('imagenes/github_logo.png') }}" alt="Github Logo" class="w-4 h-4">
-            Continuar con Github
-          </a>
-        </div>
-
         </form>
         @error('credenciales')
 

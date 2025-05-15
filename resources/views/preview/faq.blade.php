@@ -15,7 +15,7 @@
     >
       <div class="w-full lg:w-1/2">
         <img
-          src="https://pagedone.io/asset/uploads/1696230182.png"
+          src="/imagenes/duda.jpg"
           alt="FAQ tailwind section"
           class="w-full rounded-xl object-cover"
         />
@@ -68,7 +68,7 @@
                 aria-labelledby="basic-heading-one-with-arrow-always-open"
                 style="display: none;"
               >
-                <p class="text-base font-normal text-gray-600 ">
+                <p class="text-base font-normal text-gray-600 text-justify">
                   Para crear una cuenta, busque el botón “Registrarse” o “Crear
 cuenta”, complete el formulario de registro con su
 información personal y haga clic en “Crear cuenta” o “Registrarse”. Verifique su dirección de correo electrónico si es necesario y luego inicie
@@ -109,7 +109,7 @@ sesión para comenzar a usar la plataforma.
                 aria-labelledby="basic-heading-two-with-arrow-always-open"
                 style="display: none;"
               >
-                <p class="text-base text-gray-500 font-normal">
+                <p class="text-base font-normal text-gray-600 text-justify">
                   Nuestro enfoque en brindar capacidades de gestión de contenido sólidas y fáciles de usar garantiza que usted pueda administrar su contenido con confianza y alcanzar sus objetivos de marketing de contenido con facilidad.
                 </p>
               </div>
@@ -147,7 +147,7 @@ sesión para comenzar a usar la plataforma.
                 aria-labelledby="basic-heading-three-with-arrow-always-open"
                 style="display: none;"
               >
-                <p class="text-base text-gray-500 font-normal">
+                <p class="text-base font-normal text-gray-600 text-justify">
                   Para restablecer tu contraseña, ve a la página de inicio de sesión y haz clic en "¿Olvidaste tu contraseña?". Luego, ingresa tu dirección de correo electrónico asociada con tu cuenta y te enviaremos un enlace para restablecer tu contraseña. Si no recibes el correo, revisa tu carpeta de spam o intenta nuevamente.
                 </p>
               </div>
@@ -185,7 +185,7 @@ sesión para comenzar a usar la plataforma.
                 aria-labelledby="basic-heading-four-with-arrow-always-open"
                 style="display: none;"
               >
-                <p class="text-base text-gray-500 font-normal">
+                <p class="text-base font-normal text-gray-600 text-justify">
                    El proceso de pago es sencillo: selecciona los productos que deseas comprar y dirígete a la página de pago. Allí, podrás elegir tu método de pago, ya sea tarjeta de crédito, débito o PayPal. Después de ingresar los detalles de pago, haz clic en "Confirmar compra". Recibirás una confirmación de tu pedido por correo electrónico.
                 </p>
             </div> 
@@ -224,7 +224,7 @@ sesión para comenzar a usar la plataforma.
                 aria-labelledby="basic-heading-one-with-arrow-always-open"
                 style="display: none;"
               >
-                <p class="text-base font-normal text-gray-600 ">
+                <p class="text-base font-normal text-gray-600 text-justify">
                   Los pedidos son procesados rápidamente para garantizar una entrega ágil. Sin embargo, si necesitas modificar o cancelar un pedido, comunícanoslo lo antes posible. Si el pedido aún no ha sido procesado, podremos realizar cambios; de lo contrario, te orientaremos sobre los pasos a seguir.
                 </p>
               </div>
