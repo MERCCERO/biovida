@@ -13,6 +13,7 @@ class CartController extends Controller
 {
     //
     public function add(Request $request) {
+        
     $request->validate([
         'id' => 'required|exists:productos,id',
         'cantidad' => 'required|integer|min:1'
@@ -70,7 +71,7 @@ class CartController extends Controller
                 'producto_Id' => $producto->id,
                 'cantidad' => $producto->qty,
                 'precio' => $producto->price,
-               'subtotal' => $subtotal,
+                'subtotal' => $subtotal,
                 'descuento' => 0,
             ]);
 
@@ -92,8 +93,9 @@ class CartController extends Controller
         }
 
         Cart::destroy();
-                return redirect()->back()->with("success","Pedido realizado con éxito");
-                return view('/productos/catalogoProductos');
+        
+        return redirect()->route('catalogo')->with("success","Pedido realizado con éxito");
+
 
     }
     public function updateCantidad(Request $request)

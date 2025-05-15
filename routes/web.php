@@ -101,7 +101,7 @@ Route::get('/productos/{id}/editar', [ProductoController::class, 'editar']);
 Route::get('/productos/{id}/detalle', [ProductoController::class, 'detalle']);
 Route::post('/productos/{id}/actualizar', [ProductoController::class, 'actualizar']);
 Route::get('/productos/{id}/mostrar', [ProductoController::class, 'mostrar']);
-Route::get('/catalogoProductos', [ProductoController::class, 'verProductos']);
+Route::get('/catalogoProductos', [ProductoController::class, 'verProductos'])->name('catalogo');
 Route::post('/productos/{id}/borrar', [ProductoController::class, 'borrar']);
 
 

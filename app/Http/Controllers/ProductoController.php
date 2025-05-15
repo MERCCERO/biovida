@@ -96,7 +96,7 @@ class ProductoController extends Controller
   }
 
     public function verProductos() {
-    $productos = Producto::paginate(15);
+    $productos = Producto::paginate(8);
     return view('productos/catalogoProductos', compact('productos'));
 }
 
